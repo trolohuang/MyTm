@@ -1,0 +1,157 @@
+1.Parameters:
+----------------------------------------------------------------------------
+.	md_steps 20000
+.	A 5
+.	B 5
+.	C 18
+.	max_step 40
+.	max_sub_step 4
+.	solid_cutoff 0.700000
+.	liquid_cutoff 0.200000
+.	Mode
+.	build defect 1 0 0
+.	size	1.000000	1.000000	0.200000	0.000000	0.000000	0.000000
+.	pos	0.500000	0.500000	0.500000	0.000000	0.000000	0.000000
+.	rot	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+.done
+
+2.build mode...
+----------------------------------------------------------------------------
+.	Relaxing...
+.	Recheck the solid temperature: 
+.		2500.00 solid
+.		3000.00 
+
+.	Recheck the liquid Temperature 
+.		 4500.00 liquid
+.		 4000.00 liquid
+.		 3500.00 liquid
+.		 3000.00 
+
+.done
+
+3. Melting Temperature Search Start.
+----------------------------------------------------------------------------
+.	bisection method start temperature:2500.000000	end temperature:3500.000000
+.		qlmi OP classification start.
+IF.	Step:1	Temperature:1750.000000 [from: 0.000000 to 3500.000000, ratio: 0.500000]
+.		Mode Rebuilding...
+.		Rebuild done
+IF.		sub_step:1	solidfication:0.08	liquid	Temperature:1496.27	Pressure:-3.81
+IF.	Step:2	Temperature:875.000000 [from: 0.000000 to 1750.000000, ratio: 0.500000]
+.		Mode Rebuilding...
+.		Rebuild done
+IF.		sub_step:1	solidfication:0.86	solid	Temperature:943.29	Pressure:-70.09
+IF.	Step:3	Temperature:1312.500000 [from: 875.000000 to 1750.000000, ratio: 0.500000]
+.		Mode Rebuilding...
+.		Rebuild done
+IF.		sub_step:1	solidfication:0.64	liquid	Temperature:1219.02	Pressure:7.71 stable
+
+SF.	steps	solidfraction
+SF.	0	0.4139
+SF.	2	0.5267
+SF.	4	0.5972
+SF.	6	0.6567
+SF.	8	0.7217
+SF.	10	0.5661
+SF.	12	0.6900
+SF.	14	0.5489
+SF.	16	0.8761
+SF.	18	0.6394
+SF.	20	0.6156
+SF.	22	0.3444
+SF.	24	0.8494
+SF.	26	0.6661
+SF.	28	0.8094
+SF.	30	0.3056
+SF.	32	0.7461
+SF.	34	0.5911
+SF.	36	0.7461
+SF.	38	0.4339
+SF.	40	0.6328
+SF.	42	0.6939
+SF.	44	0.6767
+SF.	46	0.7083
+SF.	48	0.4894
+SF.	50	0.7511
+SF.	52	0.4661
+SF.	54	0.6383
+SF.	56	0.4706
+SF.	58	0.7767
+SF.	60	0.6572
+SF.	62	0.7606
+SF.	64	0.3789
+SF.	66	0.7572
+SF.	68	0.5472
+SF.	70	0.7094
+SF.	72	0.6328
+SF.	74	0.6061
+SF.	76	0.3817
+SF.	78	0.7244
+SF.	80	0.5156
+SF.	82	0.6639
+SF.	84	0.5939
+SF.	86	0.4889
+SF.	88	0.8122
+SF.	90	0.5494
+SF.	92	0.6400
+SF.	94	0.4700
+SF.	96	0.6072
+SF.	98	0.6106
+SF.	100	0.5600
+SF.	102	0.3517
+SF.	104	0.7889
+SF.	106	0.5050
+SF.	108	0.7317
+SF.	110	0.5078
+SF.	112	0.5928
+SF.	114	0.7872
+SF.	116	0.6067
+SF.	118	0.7367
+SF.	120	0.2944
+SF.	122	0.8306
+SF.	124	0.4211
+SF.	126	0.6133
+SF.	128	0.4339
+SF.	130	0.7139
+SF.	132	0.5217
+SF.	134	0.8594
+SF.	136	0.5322
+SF.	138	0.7767
+SF.	140	0.4750
+SF.	142	0.6917
+SF.	144	0.5378
+SF.	146	0.8722
+SF.	148	0.4661
+SF.	150	0.6022
+SF.	152	0.7906
+SF.	154	0.4944
+SF.	156	0.7356
+SF.	158	0.7367
+SF.	160	0.6467
+SF.	162	0.4028
+SF.	164	0.7717
+SF.	166	0.5406
+SF.	168	0.8350
+SF.	170	0.3606
+SF.	172	0.8833
+SF.	174	0.5211
+SF.	176	0.7494
+SF.	178	0.3706
+SF.	180	0.8367
+SF.	182	0.5111
+SF.	184	0.7728
+SF.	186	0.6656
+SF.	188	0.7550
+SF.	190	0.6544
+SF.	192	0.7211
+SF.	194	0.7517
+SF.	196	0.7667
+SF.	198	0.6094
+SF.	200	0.6400
+
+IF.	bisection method done. Temperature Range: 875.000000-1750.000000
+.done
+
+----------------------------------------------------------------------------
+IF.	Temperature: 1219.022929

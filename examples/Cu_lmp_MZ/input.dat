@@ -1,0 +1,14 @@
+md_steps 20000
+md_steps_adaption 1
+md_script_interpreter python
+md_script_filename  ./MyTm_MD_lammps.py
+max_step 60 
+max_sub_step 4 
+method -1 6 0.4 0.5 5.0 
+init_tem_check 1
+supercell 4 4 20
+solid_cutoff 0.85
+liquid_cutoff 0.25
+bisection_relax_struct 0
+
+run bisection 3000 3500 2 50.1
