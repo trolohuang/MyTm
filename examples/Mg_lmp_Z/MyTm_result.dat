@@ -1,0 +1,75 @@
+1.Parameters:
+----------------------------------------------------------------------------
+.	md_steps 20000
+.	A 7
+.	B 7
+.	C 7
+.	max_step 60
+.	max_sub_step 4
+.	solid_cutoff 0.850000
+.	liquid_cutoff 0.250000
+.	Mode
+.done
+
+2.build mode...
+----------------------------------------------------------------------------
+.	Relaxing...
+.	Recheck the solid temperature: 
+.		3000.00 solid
+.		3500.00 liquid
+
+.	Recheck the liquid Temperature 
+.		 3500.00 liquid
+.		 3000.00 solid
+
+.done
+
+3. Melting Temperature Search Start.
+----------------------------------------------------------------------------
+.	bisection method start temperature:3000.000000	end temperature:3500.000000
+.		qlmi OP classification start.
+IF.	Step:1	Temperature:1750.000000 [from: 0.000000 to 3500.000000, ratio: 0.500000]
+.		Mode Rebuilding...
+.		Rebuild done
+IF.		sub_step:1	solidfication:0.11	liquid	Temperature:1261.59	Pressure:43002.05
+IF.	Step:2	Temperature:875.000000 [from: 0.000000 to 1750.000000, ratio: 0.500000]
+.		Mode Rebuilding...
+.		Rebuild done
+IF.		sub_step:1	solidfication:0.99	solid	Temperature:1174.41	Pressure:32256.62
+IF.	Step:3	Temperature:1312.500000 [from: 875.000000 to 1750.000000, ratio: 0.500000]
+.		Mode Rebuilding...
+.		Rebuild done
+IF.		sub_step:1	solidfication:0.98	solid	Temperature:1336.79	Pressure:36640.56
+IF.	Step:4	Temperature:1531.250000 [from: 1312.500000 to 1750.000000, ratio: 0.500000]
+.		Mode Rebuilding...
+.		Rebuild done
+IF.		sub_step:1	solidfication:0.11	liquid	Temperature:1175.23	Pressure:40623.73
+IF.	Step:5	Temperature:1421.875000 [from: 1312.500000 to 1531.250000, ratio: 0.500000]
+.		Mode Rebuilding...
+.		Rebuild done
+IF.		sub_step:1	solidfication:0.98	solid	Temperature:1362.88	Pressure:37926.04
+IF.	Step:6	Temperature:1476.562500 [from: 1421.875000 to 1531.250000, ratio: 0.500000]
+.		Mode Rebuilding...
+.		Rebuild done
+IF.		sub_step:1	solidfication:0.95	solid	Temperature:1374.89	Pressure:38560.41
+IF.	Step:7	Temperature:1503.906250 [from: 1476.562500 to 1531.250000, ratio: 0.500000]
+.		Mode Rebuilding...
+.		Rebuild done
+IF.		sub_step:1	solidfication:0.09	liquid	Temperature:1168.18	Pressure:40151.40
+IF.	Step:8	Temperature:1490.234375 [from: 1476.562500 to 1503.906250, ratio: 0.500000]
+.		Mode Rebuilding...
+.		Rebuild done
+IF.		sub_step:1	solidfication:0.92	solid	Temperature:1381.84	Pressure:38589.41
+IF.	Step:9	Temperature:1497.070312 [from: 1490.234375 to 1503.906250, ratio: 0.500000]
+.		Mode Rebuilding...
+.		Rebuild done
+IF.		sub_step:1	solidfication:0.11	liquid	Temperature:1207.87	Pressure:39762.37
+IF.	Step:10	Temperature:1493.652344 [from: 1490.234375 to 1497.070312, ratio: 0.500000]
+.		Mode Rebuilding...
+.		Rebuild done
+IF.		sub_step:1	solidfication:0.95	solid	Temperature:1393.49	Pressure:38557.36
+IF.	bisection method done. Temperature: 1493.652344-1497.070312
+.done
+
+----------------------------------------------------------------------------
+IF.	Temperature: 1495.361328

@@ -1,0 +1,46 @@
+
+units           metal
+atom_style      atomic
+boundary        p p p
+
+read_data       data_mytm.lammps
+
+
+pair_style	eam/fs
+
+pair_coeff	* *  Mg.eam.fs Mg
+
+
+
+
+neighbor	2.0 bin
+neigh_modify	delay 10 every 1 check yes
+
+velocity	all create 200.0 134563
+
+# Thermodynamic variables
+variable        t equal temp
+variable        p equal press
+variable        v equal vol
+variable        s equal step
+
+# 输出热力学量：两列（step value）
+fix tprint all print 1 "${s} ${t}" file Temperature_MyTm screen no
+fix pprint all print 1 "${s} ${p}" file Pressure_MyTm   screen no
+fix vprint all print 1 "${s} ${v}" file Volume_MyTm     screen no
+
+# 动力学
+timestep        0.001
+thermo          100
+thermo_style    custom step temp press vol pe ke etotal
+
+# NVT 升温过程
+fix myNVT all npt temp 200 200  0.1 iso 0.0001 0.0001 1
+#fix myNVT all nph iso 0.0001 0.0001 1
+#fix myNVT all nve
+dump mydump all custom 100 dump_mytm.lammpstrj id type x y z
+dump_modify mydump sort id
+
+run 5000
+
+unfix myNVT
