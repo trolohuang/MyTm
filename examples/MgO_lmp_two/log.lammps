@@ -1,0 +1,134 @@
+LAMMPS (22 Jul 2025 - Update 3)
+
+units           metal
+atom_style      charge
+boundary        p p p
+
+read_data       data_mytm.lammps
+Reading data file ...
+  orthogonal box = (0 0 0) to (25.164017 25.164017 50.328033)
+  1 by 2 by 3 MPI processor grid
+  reading atoms ...
+  3417 atoms
+  read_data CPU = 0.008 seconds
+
+set		type 1 charge 1.2
+Setting atom values ...
+  1708 settings made for charge
+set		type 2 charge -1.2
+Setting atom values ...
+  1709 settings made for charge
+
+pair_style	buck/coul/long 10.0
+
+pair_coeff	1 1 38868.5 0.2066 43.773
+pair_coeff	2 2 43469.3723 0.2140 5.0840
+pair_coeff	1 2 12655.4 0.2089 36.798
+
+kspace_style	pppm 1e-5
+
+neighbor	2.0 bin
+neigh_modify	delay 10 every 1 check yes
+
+velocity	all create 3359.375 134563
+
+# Thermodynamic variables
+variable        t equal temp
+variable        p equal press
+variable        v equal vol
+variable        s equal step
+
+# 输出热力学量：两列（step value）
+fix tprint all print 1 "${s} ${t}" file Temperature_MyTm screen no
+fix pprint all print 1 "${s} ${p}" file Pressure_MyTm   screen no
+fix vprint all print 1 "${s} ${v}" file Volume_MyTm     screen no
+
+# 动力学
+timestep        0.001
+thermo          100
+thermo_style    custom step temp press vol pe ke etotal
+
+# NVT 升温过程
+fix myNVT all npt temp 3359.375 3359.375  0.1 iso 0.0001 0.0001 1
+
+dump mydump all custom 1 dump_mytm.lammpstrj id type x y z
+dump_modify mydump sort id
+
+run 2000
+PPPM initialization ...
+WARNING: System is not charge neutral, net charge = -1.2
+For more information see https://docs.lammps.org/err0029 (../kspace.cpp:330)
+  using 12-bit tables for long-range coulomb
+  G vector (1/distance) = 0.32511066
+  grid = 32 32 50
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.00015310108
+  estimated relative force accuracy = 1.0632282e-05
+  using double precision KISS FFT
+  3d grid and FFT values/proc = 21528 8704
+Generated 0 of 1 mixed pair_coeff terms from geometric mixing rule
+Neighbor list info ...
+  update: every = 1 steps, delay = 10 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 12
+  ghost atom cutoff = 12
+  binsize = 6, bins = 5 5 9
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair buck/coul/long, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 6.332 | 6.373 | 6.388 Mbytes
+   Step          Temp          Press          Volume         PotEng         KinEng         TotEng    
+         0   3359.375       775257.33      31869.107     -24605.976      1483.341      -23122.635    
+       100   4803.3128      279216.04      34498.248     -26326.548      2120.9155     -24205.633    
+       200   3957.7461      128582.3       36583.561     -26591.467      1747.5533     -24843.914    
+       300   3472.0458      65756.748      37849.288     -26695.307      1533.091      -25162.216    
+       400   3248.1501      34128.442      38710.058     -26750.977      1434.2293     -25316.747    
+       500   3163.293       25865.551      39329.183     -26735.396      1396.7604     -25338.635    
+       600   3236.1534      24723.616      39857.696     -26662.716      1428.9321     -25233.784    
+       700   3361.1699      24689.741      40400.104     -26595.402      1484.1335     -25111.268    
+       800   3365.2613      17142.993      40929.126     -26510.478      1485.9401     -25024.538    
+       900   3371.6108      5131.8303      41341.499     -26456.243      1488.7437     -24967.499    
+      1000   3407.2193     -1205.5403      41577.244     -26428.407      1504.4667     -24923.94     
+      1100   3400.4671      925.59598      41683.438     -26415.569      1501.4853     -24914.084    
+      1200   3333.9011      929.78437      41749.436     -26421.525      1472.0929     -24949.432    
+      1300   3377.9784     -2083.9516      41775.097     -26496.605      1491.5553     -25005.049    
+      1400   3294.9736      147.40578      41776.71      -26490.709      1454.9043     -25035.805    
+      1500   3288.2327      4811.8452      41803.234     -26463.9        1451.9279     -25011.972    
+      1600   3488.9994     -916.59077      41904.156     -26504.326      1540.5769     -24963.749    
+      1700   3381.7787     -2256.8139      42025.009     -26426.1        1493.2334     -24932.866    
+      1800   3370.8264     -585.15832      42088.724     -26404.455      1488.3973     -24916.057    
+      1900   3345.9641     -754.36545      42099.686     -26397.938      1477.4193     -24920.518    
+      2000   3316.1526     -4965.9673      42003.476     -26409.867      1464.256      -24945.611    
+Loop time of 19.1316 on 6 procs for 2000 steps with 3417 atoms
+
+Performance: 9.032 ns/day, 2.657 hours/ns, 104.539 timesteps/s, 357.210 katom-step/s
+99.8% CPU use with 6 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 5.1406     | 7.3146     | 9.8506     |  61.8 | 38.23
+Kspace  | 5.1671     | 7.7731     | 10.017     |  61.6 | 40.63
+Neigh   | 0.32518    | 0.38963    | 0.45058    |   6.9 |  2.04
+Comm    | 0.16377    | 0.49902    | 0.64796    |  23.6 |  2.61
+Output  | 1.1412     | 1.1977     | 1.2484     |   3.5 |  6.26
+Modify  | 1.2759     | 1.5607     | 2.2452     |  28.3 |  8.16
+Other   |            | 0.3969     |            |       |  2.07
+
+Nlocal:          569.5 ave         583 max         559 min
+Histogram: 2 0 0 1 0 0 2 0 0 1
+Nghost:        6174.67 ave        6384 max        6034 min
+Histogram: 2 2 0 0 0 0 0 0 0 2
+Neighs:         168463 ave      179953 max      151608 min
+Histogram: 2 0 0 0 0 0 0 0 2 2
+
+Total # of neighbors = 1010779
+Ave neighs/atom = 295.8089
+Neighbor list builds = 105
+Dangerous builds = 0
+
+unfix myNVT
+Total wall time: 0:00:19
